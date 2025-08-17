@@ -1,10 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import ManagerHome from '../pages/ManagerHome';
+import ManagerHome from '../pages/Manager/Home';
 import SignInPage from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Pricing from '../pages/SignUp/pricing';
 import SuccessCheckout from '../pages/SuccessCheckout';
 import LayoutDashboard from '../components/layout';
+import ManageCoursePage from '../pages/Manager/Courses';
+import ManagerHomePage from '../pages/Manager/Home';
 
 
 const router = createBrowserRouter([
@@ -31,6 +33,16 @@ const router = createBrowserRouter([
   {
     path: "/manager",
     element: <LayoutDashboard />,
+    children: [
+      {
+        index: true,
+        element: <ManagerHomePage />
+      },
+      {
+        path : "/manager/courses",
+        element : <ManageCoursePage />
+      }
+    ]
   }
 ])
 
