@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Proptypes from 'prop-types';
 export default function ContentItem({
   id = 1,
   courseId = 1,
@@ -35,4 +36,12 @@ export default function ContentItem({
         </div>
       </div>
   )
+}
+ContentItem.propTypes = {
+  id: Proptypes.number,
+  courseId: Proptypes.number,
+  index: Proptypes.number,
+  title: Proptypes.string,
+  type: Proptypes.string,
+  thumbnail: Proptypes.string
 }
