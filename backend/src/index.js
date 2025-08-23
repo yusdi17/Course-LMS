@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import globalRoute from './routes/globalRoute.js';
 import authRoutes from './routes/authRoutes.js';
 import connectDB from './utils/database.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.get('/', (req,res)=> {
 
 app.use('/api', globalRoute)
 app.use('/api', authRoutes)
+app.use('/api', paymentRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
