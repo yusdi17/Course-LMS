@@ -38,7 +38,7 @@ export const signUpAction = async (req, res) => {
         customer_details: {
           email: user.email
         },
-        callback: {
+        callbacks: {
           finish: finish
         }
       }),
