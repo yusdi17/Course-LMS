@@ -6,3 +6,5 @@ export const signUpSchema = z.object({
   password: z.string().min(8),
   // confirmPassword: z.string().min(8),
 })
+
+export const signInSchema = signUpSchema.omit({name: true})
