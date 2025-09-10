@@ -3,11 +3,14 @@ import userModel from "../models/userModel.js";
 export const verifyToken = async (req, res, next) => {
   const secretKey = process.env.SECRET_KEY_JWT ?? "";
 
-  if (req?.headers?.split("")[0] === "JWT") {
-    const decoded = jwt.verify(req.headers.split(" ")[1], secretKey);
+  if (req?.headers?.authorization?.split(' ')[0] === "JWT") {
+    const decoded = jwt.verify(
+      req.headers?.authorization?.split(' ')[1],
+      secretKey
+    );
 
     const user = await userModel.findById(
-      decoded.padStart.id,
+      decoded.data._id,
       "_id name email role"
     );
 
