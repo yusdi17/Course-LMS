@@ -1,9 +1,17 @@
 import express from "express";
-import { getCourse } from "../controllers/courseController.js";
+import { getCourse, postCourse } from "../controllers/courseController.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
+import multer from "multer";
+import { fileFilter, fileStorageCourse } from "../utils/multer.js";
 
 const courseRoutes = express.Router();
 
+const upload = multer({
+  storage: fileStorageCourse,
+  fileFilter
+})
+
 courseRoutes.get('/courses', verifyToken ,getCourse)
+courseRoutes.post('/courses', verifyToken ,upload.single('thumbnail'), postCourse)
 
 export default courseRoutes
