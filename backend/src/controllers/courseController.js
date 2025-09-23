@@ -2,6 +2,7 @@ import courseModel from "../models/courseModel.js";
 import { mutateCourseSchema } from "../utils/schema.js";
 import fs from "fs";
 import categoryModel from "../models/categoryModel.js";
+import userModel from "../models/userModel.js";
 
 export const getCourse = async (req, res) => {
   try {
@@ -35,6 +36,9 @@ export const postCourse = async (req, res) => {
   try {
     const body = req.body;
 
+      if (req.file && req.file.filename) {
+      body.thumbnail = req.file.filename;
+    }
     console.log(req.file);
     
 
@@ -68,7 +72,7 @@ export const postCourse = async (req, res) => {
       category: category._id,
       description: parse.data.description,
       tagline: parse.data.tagline,
-      thumbnail: req.file?.filename,
+      thumbnail: parse.data.thumbnail,
       manager: req.user?.id,
     });
 

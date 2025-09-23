@@ -95,7 +95,9 @@ export const signInAction = async (req, res) => {
       status: "success",
     });
 
-    if (existingUser.role !== "student" && !isvalidUser) {
+    if (existingUser.role !== "manager" && !isvalidUser) {
+      console.log(isvalidUser);
+      
       return res.status(400).json({ message: "User not verified" });
     }
 

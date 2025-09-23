@@ -18,4 +18,5 @@ export const mutateCourseSchema = z.object({
   categoryId: z.string(),
   tagline: z.string().min(5),
   description: z.string().min(5),
+  thumbnail: z.string().min(1)
 })
