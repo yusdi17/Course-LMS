@@ -3,6 +3,7 @@ import { mutateCourseSchema } from "../utils/schema.js";
 import fs from "fs";
 import categoryModel from "../models/categoryModel.js";
 import userModel from "../models/userModel.js";
+import { log } from "console";
 
 export const getCourse = async (req, res) => {
   try {
@@ -20,9 +21,18 @@ export const getCourse = async (req, res) => {
         select: "name",
       });
 
+    const imageUrl = process.env.APP_URL + '/uploads/courses/';
+    const response = courses.map((item) => {
+      return {
+        ...item.toObject(),
+        thumbnail_url: imageUrl + item.thumbnail,
+        total_students: item.students.length
+      }
+    })
+
     return res.json({
       message: "Success",
-      data: courses,
+      data: response,
     });
   } catch (error) {
     console.log(error);
