@@ -24,7 +24,6 @@ export default function SignInPage() {
     const onSubmit = async (data) => {
         try {
             const response = await mutateAsync(data)
-            console.log(response);
 
             secureLocalStorage.setItem(STORAGE_KEY, response.data)
 
