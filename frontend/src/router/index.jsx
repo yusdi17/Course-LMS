@@ -16,6 +16,7 @@ import CreateStudentsPage from '../pages/Manager/Students/create-students';
 import StudentPage from '../pages/student/Student-Overview';
 import secureLocalStorage from 'react-secure-storage';
 import { MANAGER_SESSION, STORAGE_KEY } from '../utils/const';
+import { getCourse } from '../services/courseService';
 
 
 const router = createBrowserRouter([
@@ -44,8 +45,6 @@ const router = createBrowserRouter([
     path: "/manager",
     loader: async () => {
       const session = secureLocalStorage.getItem(STORAGE_KEY);
-
-      console.log(session);
       if (!session || session.role !== "manager") {
         throw redirect("/manager/sign-in")
       }
@@ -60,6 +59,10 @@ const router = createBrowserRouter([
       },
       {
         path : "/manager/courses",
+        loader: async () => {
+          const data = await getCourse();
+          return data;
+        },
         element : <ManageCoursePage />
       },
       {
